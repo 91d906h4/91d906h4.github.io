@@ -140,7 +140,165 @@ JLT $i 10 FOR_LOOP # <stopping condition>
 
 <p>
     There's a pattern to follow to translate the high-level programming language into assmebly language.<br />
-    And we will not talk to many details about how to do that. (You can see the details on my <a href="https://github.com/91d906h4/HIC/blob/master/v3/assembler%20v3.py" target="_blank">GitHub</a>.)
+    And we will not talk too many details about how to do that. (You can see the details on my <a href="https://github.com/91d906h4/HIC/blob/master/v3/assembler%20v3.py" target="_blank">GitHub</a>.)
+</p>
+
+<h2>Syntax</h2>
+
+<h3>Comment</h3>
+
+<p>
+    Like Python, HyLang use the <code>#</code> to comment the code.
+</p>
+
+```
+# This is a comment is HyLang.
+```
+
+<h3>Variables</h3>
+
+<p>
+    There are four types (integer, string, float, and list) in HyLang. You can use the keyword <code>var</code> to declare a new variable.
+</p>
+
+```
+var name = '91d906h4';
+var age = 20;
+var f = 10.5;
+var new_f = f;
+var arr = [1, 2, 3, 4, 5];
+```
+
+<h3>If Else</h3>
+
+<p>
+    There is no difference in <code>if</code>, <code>else</code> statement between HyLang and other programming languages. You can use <code>if</code>, <code>else</code> combination or just one <code>if</code>.
+</p>
+
+```
+# Example 1
+
+var time = 19;
+
+if(time >= 18){
+    print('こんばんは！');
+}
+else{
+    print('こんにちは！');
+}
+
+# Output:
+# こんばんは！
+```
+
+```
+# Example 2
+
+input(name);
+
+if(name == '91d906h4'){
+    print('わ、私、ですか...');
+}
+```
+
+<h3>For Loop</h3>
+
+<p>
+    In HyLang, the conditions of for loop in split by a <code>,</code> (comma), not by a <code>;</code> (semicolon).
+</p>
+
+```
+for(var i = 0, i <= 10, i += 1){
+    print(i);
+}
+
+# Output:
+# 0
+# 1
+# .
+# .
+# .
+# 10
+```
+
+<h3>Cal</h3>
+
+<p>
+    In HyLang, any types of operation must start with <code>cal</code> keyword. And there can only be at most one operator in a <code>col</code> statement.
+</p>
+
+```
+# Example 1
+
+var hoge = 1;
+cal hoge = hoge + 1;
+print(hoge);
+
+# Output:
+# 2
+```
+
+```
+# Example 2
+
+var fuga = 'Hello';
+cal fuga = fuga + ' World!';
+print(fuga);
+
+# Output:
+# Hello World!
+```
+
+<h3>While Loop</h3>
+
+```
+var counter = 1;
+
+while(counter < 10){
+    cal counter = counter * 2;
+    print(counter);
+}
+
+# Output:
+# 2
+# 4
+# 8
+# 16
+```
+
+<h3>Input</h3>
+
+<p>
+    You can use <code>input()</code> function to get the input from the user.
+</p>
+
+```
+var greeting = 'Hello! ';
+input(name);
+cal greeting += name;
+print(greeting);
+
+# Input:
+# John
+
+# Output:
+# Hello! John
+```
+
+<h2>Remarks</h2>
+<p>
+    Required Python packages:
+    <ul>
+        <li>os</li>
+        <li>sys</li>
+        <li>random</li>
+        <li>string</li>
+        <li>copy</li>
+    </ul>
+    Recommanded Python version:
+    <ul>
+        <li>>= 3.11</li>
+    </ul>
 </p>
 
 <h2>References</h2>
