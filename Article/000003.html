@@ -1,0 +1,286 @@
+## Introduction
+
+In this semester, we have a course called "System Softrware", this is the first time I was exposed to assmbly language. I was so excited because I could write the basic assembly language. And then I think, Why don't I make an assmbly language myself!<br />
+Here's the beginning of HIC.
+
+<!-------------------->
+
+## HIC and the "Executer"
+
+To create a real assembly language, we may need to design a new CPU or machine, that's a quite difficult task. So, what we are going to do is to make an "executer" to simulate how a real computer works.<br />
+This executer will parse and run our assembly language named "HIC". (This name is from "SIC/EX" in the book <a href="https://www.amazon.co.jp/System-Software-Introduction-Systems-Programming/dp/0201423006" target="_blank">System Software</a>.)
+
+First, we need to design the syntax of HIC. Like most assembly language, HIC needs some instructions like `ADD`, `SUB`, `MUL`, `DIV`, `JLT`, etc. To keep our assembly simple, we just use the basic instructions:
+
+```
+VAL $a <value>     # Assign $a = <value>
+
+ADD $a $b          # Assign $a = $a + $b
+SUB $a $b
+MUL $a $b
+DIV $a $b
+
+JEQ $a $b <label> # Jump to <label> if $a == $b
+JNQ $a $b <label>
+JLT $a $b <label>
+JLE $a $b <label>
+
+LAB <label>        # Assign a label
+MSG $a             # Print value of $a on the screen
+IPT $a             # Input a value and assign $a = input value
+END                # End the program
+```
+
+Here are the all instructions in HIC.<br />
+For example, if you want to write a loop to add 1 to 10 numbers and print the result, you can do this with the following HIC code:
+
+```
+# Assign $a and $b
+VAL $a 1
+VAL $b 1
+
+# Assign the label
+LAB SUM
+
+ADD $a $b
+ADD $b 1
+
+# If $b is less than 10, then jump to label "SUM"
+JLT $b 10 SUM
+
+# Print the result
+MSG $a
+```
+
+Now, our HIC assembly language is almost done. The next step is to parse each line in HIC file and execute them.
+
+What the executer does is just to read the instructions line by line and execute immediatly. This is quite simple, for example, if we have the instruction:
+
+```
+VAL $a 10
+```
+
+We just need a Python dict and say that, the value of key $a is an integer 10.<br />
+Or:
+
+```
+ADD $a 1
+```
+
+In this case, we need to get the value of $a in a python dict and add 10 to it, then save the new value back to the dict.
+
+Follow this concept, we can write the executer. (You can find the whole source of executer on my <a href="https://github.com/91d906h4/HIC/blob/master/v3/executer%20v3.py" target="_blank">GitHub</a>.)
+
+<!-------------------->
+
+## HyLang
+
+Now we have the executer to simulate the executoin of assembly, the next step is to design a compiler which will translate our high-level programming language into HIC.
+
+The basic concept of HyLang compiler is as same as the executer. Let's see some examples:
+
+```
+var a = 10;
+var b = 'Hello!';
+```
+
+This is similar to the instruction `VAL` in HIC. So, we can translate them into:
+
+```
+VAL $a 10
+VAL $b 'Hello!'
+```
+
+But how about the for-loop? Fist, we need to design a for-loop in HyLang:
+
+```
+for(var i = 1, i < 10, i += 1){
+    print(i);
+}
+```
+
+As you can see, the structure of for-loop is:
+
+```
+for(<initialization of the starting value>, <stopping condition>, <what to do in the end of each loop>){...}
+```
+
+And the HIC code will be:
+
+```
+VAL $i 1 # <initialization of the starting value>
+
+LAB FOR_LOOP # Assign a label
+
+MSG $i # Something to do in the loop
+
+ADD $i 1 # <what to do in the end of each loop>
+
+JLT $i 10 FOR_LOOP # <stopping condition>
+```
+
+There's a pattern to follow to translate the high-level programming language into assmebly language.<br />
+And we will not talk too many details about how to do that. (You can see the details on my <a href="https://github.com/91d906h4/HIC/blob/master/v3/assembler%20v3.py" target="_blank">GitHub</a>.)
+
+<!-------------------->
+
+## Syntax
+
+### Comment
+
+Like Python, HyLang use the `#` to comment the code.
+
+```
+# This is a comment is HyLang.
+```
+
+### Variables
+
+There are four types (integer, string, float, and list) in HyLang. You can use the keyword `var` to declare a new variable.
+
+```
+var name = '91d906h4';
+var age = 20;
+var f = 10.5;
+var new_f = f;
+var arr = [1, 2, 3, 4, 5];
+```
+
+### If Else
+
+There is no difference in `if`, `else` statement between HyLang and other programming languages. You can use `if`, `else` combination or just one `if`.
+
+```
+# Example 1
+
+var time = 19;
+
+if(time >= 18){
+    print('こんばんは！');
+}
+else{
+    print('こんにちは！');
+}
+
+# Output:
+# こんばんは！
+```
+
+```
+# Example 2
+
+input(name);
+
+if(name == '91d906h4'){
+    print('わ、私、ですか...');
+}
+```
+
+### For Loop
+
+In HyLang, the conditions of for loop in split by a `,` (comma), not by a `;` (semicolon).
+
+```
+for(var i = 0, i <= 10, i += 1){
+    print(i);
+}
+
+# Output:
+# 0
+# 1
+# .
+# .
+# .
+# 10
+```
+
+### Cal
+
+In HyLang, any types of operation must start with `cal` keyword. And there can only be at most one operator in a `col` statement.
+
+```
+# Example 1
+
+var hoge = 1;
+cal hoge = hoge + 1;
+print(hoge);
+
+# Output:
+# 2
+```
+
+```
+# Example 2
+
+var fuga = 'Hello';
+cal fuga = fuga + ' World!';
+print(fuga);
+
+# Output:
+# Hello World!
+```
+
+### While Loop
+
+```
+var counter = 1;
+
+while(counter < 10){
+    cal counter = counter * 2;
+    print(counter);
+}
+
+# Output:
+# 2
+# 4
+# 8
+# 16
+```
+
+### Input
+
+You can use `input()` function to get the input from the user.
+
+```
+var greeting = 'Hello! ';
+input(name);
+cal greeting += name;
+print(greeting);
+
+# Input:
+# John
+
+# Output:
+# Hello! John
+```
+
+<!-------------------->
+
+## Remarks
+
+Required Python packages:
+<ul>
+    <li>os</li>
+    <li>sys</li>
+    <li>random</li>
+    <li>string</li>
+    <li>copy</li>
+</ul>
+
+Recommanded Python version:
+<ul>
+    <li>>= 3.11</li>
+</ul>
+
+Lisence:
+<ul>
+    <li>MIT</li>
+</ul>
+
+<!-------------------->
+
+## References
+
+<ul class="public-article-references">
+    <li>HIC, GitHub - <a href="https://github.com/91d906h4/HIC" target="_blank">https://github.com/91d906h4/HIC</a></li>
+</ul>
