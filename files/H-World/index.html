@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H-World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="./HQuery.js"></script>
+    <link href="./henstyle.css" rel="stylesheet" />
+    <style>
+        * {
+            line-height: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <span class="navbar-brand">H-World</span>
+    </div>
+
+    <div class="container container-md">
+        <h1>Hello, World!</h1>
+
+        <p>
+            I am 91d906h4. And this is a demo website.<br />
+            This website is build with
+            <a class="bg-light-warning text-decoration-none" href="https://github.com/91d906h4/HenStyle"
+                target="_blank">HenStyle (CSS Framework)</a>,
+            <a class="bg-light-info text-decoration-none" href="https://github.com/91d906h4/HQuery"
+                target="_blank">HQueyr (JavaScript Library)</a>,
+            <a class="bg-light-success text-decoration-none" href="https://github.com/91d906h4/Henver"
+                target="_blank">Henver (Front-End Web Server)</a>,
+            <a class="bg-light-danger text-decoration-none" href="https://github.com/91d906h4/Hensk"
+                target="_blank">Hensk (Back-End Framework)</a>,
+            and <a class="bg-light-primary text-decoration-none" href="https://github.com/91d906h4/HySQL"
+                target="_blank">HySQL (No-SQL Database)</a>.
+            (You can click the names to see the GitHub repos.)
+        </p>
+
+        <hr />
+
+        <h1>HQuery</h1>
+
+        <p>
+            <span class="bg-light-info">HQuery</span> is a JavaScript library (like jQuery), it helps developers to
+            simplify HTML DOM tree traversal and manipulation.<br />
+            In this section, you can see some demonstrations of <span class="bg-light-info">HQuery</span>.
+        </p>
+
+        <div class="alert alert-danger mb-5" id="alert-1" style="display: none;">
+            This is an alert.
+            <button class="btn btn-primary" id="hquery-btn-3">Click me to hide alert!</button>
+        </div>
+
+        <div class="row row-3 mb-3">
+            <button class="btn btn-info col-md" id="hquery-btn-1">Click me out!</button>
+            <button class="btn btn-danger col-md" id="hquery-btn-2">Click me to show alert!</button>
+            <div class="col-md">
+                <div class="row row-2">
+                    <button class="btn btn-outline-warning" id="hquery-btn-4">Count! <span class="badge badge-danger" id="counter">0</span></button>
+                    <button class="btn btn-outline-success" id="hquery-btn-5">Reset!</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-3 mb-3">
+            <button class="btn btn-warning col-md" id="hquery-btn-6">Click me to change color!</button>
+        </div>
+
+        <hr />
+
+        <h1>HenStyle</h1>
+
+        <p>
+            <span class="bg-light-warning">HenStyle</span> is a CSS framework build with Sass, it is very similar to
+            Bootstrap.
+            Basically, you can use <span class="bg-light-warning">HenStyle</span> just like Bootstrap.
+        </p>
+
+        <div class="text-center mb-3">
+            <div class="card text-center">
+                <div class="card-header">Header</div>
+                <img src="https://picsum.photos/280/180" />
+                <div class="card-body" style="width: 280px;">
+                    <div class="card-title">Title</div>
+                    <div class="card-text">
+                        This is the demo text with 280x180 image.
+                        <br />
+                        <button class="btn btn-info mt-3" id="henstyle-btn-1">GO!</button>
+                    </div>
+                </div>
+                <div class="card-footer">Footer</div>
+            </div>
+        </div>
+
+        <div class="alert alert-primary">A simple primary alert!</div>
+        <div class="alert alert-success">A simple success alert!</div>
+        <div class="alert alert-danger">A simple danger alert!</div>
+        <div class="alert alert-warning">A simple warning alert!</div>
+        <div class="alert alert-info">A simple info alert!</div>
+
+        <hr />
+
+        <h1>Hensk & HySQL</h1>
+
+        <p>
+            The back-end server is <span class="bg-light-danger">Hensk</span>, it looks like Flask, but only support some features.
+            In the other hand, it's much ligher than Flask, YES, much lighter, it makes <span class="bg-light-danger">Hensk</span> run faster (but not safer).<br />
+            <span class="bg-light-primary">HySQL</span> is a SQL-like No-SQL database build with Python. It's a bit slow, but fast enough!<br />
+            The following is a bulletin board, you can leave your message here! Just try it!
+        </p>
+
+        <input class="input mb-3" type="text" id="clinet-message" />
+        <button class="btn btn-info mb-3 w-100" id="send-clinet-message">Send message!</button>
+
+        <div class="overflow-scroll w-100 border" style="height: 500px;" id="message-board">
+        </div>
+    </div>
+
+    <div class="footer footer-light mt-3">
+        <div class="row row-3 text-center">
+            <div class="col-md">Hello, World!</div>
+            <div class="col-md">This website is created by 91d906h4.</div>
+            <div class="col-md">This is footer.</div>
+        </div>
+    </div>
+
+    <script>
+        $("#hquery-btn-1").click(function () {
+            $("#hquery-btn-1").remove();
+        });
+        $("#hquery-btn-2").click(function () {
+            $("#alert-1").show();
+        });
+        $("#hquery-btn-3").click(function () {
+            $("#alert-1").hide();
+        });
+        $("#hquery-btn-4").click(function () {
+            $("#counter").text(parseInt($("#counter").text()) + 1);
+        });
+        $("#hquery-btn-5").click(function () {
+            $("#counter").text("0");
+        });
+        $("#hquery-btn-6").click(function () {
+            $("#hquery-btn-6").removeClass("btn-warning").addClass("btn-primary");
+        });
+
+        $("#henstyle-btn-1").click(function () {
+            alert("GO!!");
+        });
+
+        $("#send-clinet-message").click(function () {
+            var message = $("#clinet-message").val();
+            if (message == "") return;
+            $().post("http://182.234.131.88:81/send_message", {"message": message}, function (data, status) {
+                if (status === "success") alert("Success!");
+            });
+        });
+
+        $().get("http://182.234.131.88:81/get_message", function (data, status) {
+            if (status !== "success") return;
+            data.forEach(msg => {
+                $("#message-board").prepend("<div class='card m-1' style='width: 90%;'><div class='card-body p-1'><div class='card-text mb-0'>" + msg["message"] + "</div></div></div>");
+            });
+        });
+    </script>
+</body>
+
+</html>
