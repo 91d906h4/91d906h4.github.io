@@ -116,6 +116,8 @@
                     array.push(word2index["<PAD>"]);
                 }
 
+                alert(array);
+
                 return array.slice(0, 32);
             }
         </script>
@@ -134,6 +136,8 @@
 
                     // Read result.
                     const data = results["677"].cpuData;
+
+                    alert(data);
 
                     return data;
                 }
