@@ -112,6 +112,12 @@
                     });
                 });
 
+                if (array.length == 0) {
+                    for (let i = 0; i < 32; i++) {
+                        array.push(Math.floor(Math.random() * 500));
+                    }
+                }
+
                 while (array.length < 32) {
                     array.push(word2index["<PAD>"]);
                 }
@@ -180,7 +186,7 @@
                 const data = {
                     labels: labels,
                     datasets: [{
-                        label: '星座元素分析',
+                        label: '星座元素分析%',
                         data: array,
                         fill: true,
                     }]
