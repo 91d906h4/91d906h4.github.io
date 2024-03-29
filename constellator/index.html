@@ -107,6 +107,7 @@
                 // Using Jieba to split text.
                 call_jieba_cut(text_input.value, function (result) {
                     alert(result);
+                    alert(text_input.value);
                     result.forEach((e) => {
                         if (word2index[e] == undefined) array.push(word2index["<PAD>"]);
                         else array.push(word2index[e]);
