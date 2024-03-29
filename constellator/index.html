@@ -28,7 +28,7 @@
             <a href="https://github.com/91d906h4/Constellator" target="_blank" class="btn btn-warning text-white">GitHub</a>
         </div>
 
-        <div class="container mb-5">
+        <div class="container">
             <div class="input-group mt-5 mb-1">
                 <input id="text_input" placeholder="最多可以輸入 32 個字" class="form-control" />
                 <button id="test_button" type="button" onclick="main();" class="btn btn-primary">分析！</button>
@@ -38,11 +38,23 @@
                 <span onclick="random_example();" style="cursor: pointer;" class="text-primary text-decoration-underline">不知道要輸入什麼？產生隨機例句！</span>
             </div>
 
-            <div class="text-center">
+            <div class="text-center mb-3">
                 <h4 id="waiting_text" hidden>AI 分析中...</h4>
                 <h4 id="analysis_result" hidden></h4>
                 <p ></p>
                 <canvas id="chart"></canvas>
+            </div>
+
+            <hr />
+
+            <div>
+                <h3>常見問題</h3>
+                <h5>1. 為什麼跑出來結果都一樣？</h5>
+                <p>您可能正在使用 Safari 或其他不支援的瀏覽器。<strong>建議使用安裝 Windows 之桌上型或筆記型電腦</strong>。</p>
+                <h5>2. 為什麼跑這麼久？</h5>
+                <p>Constellator AI 是使用 ONNX Runtime 技術將 AI 模型載入到您的裝置上執行，因此<strong>執行速度取決於您的 CPU 速度</strong>。</p>
+                <h5>3. 分析結果準確嗎？</h5>
+                <p>分析結果僅供參考及娛樂，<strong>並不保證 100% 準確</strong>。</p>
             </div>
         </div>
 
