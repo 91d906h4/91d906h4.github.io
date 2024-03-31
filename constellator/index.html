@@ -27,8 +27,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
         <!-- Others -->
-        <script src="./word2index.js"></script>
-        <script src="./script.js"></script>
+        <script type="text/javascript" src="./word2index.js"></script>
+        <script type="text/javascript" src="./script.js"></script>
         <link href="./style.css" rel="stylesheet" />
     </header>
 
@@ -137,6 +137,62 @@
                 var data = await run_ai(array);
 
                 var _ = draw_graph(data);
+            }
+        </script>
+
+        <script>
+            // Text-to-Array.
+            function text_to_arr() {
+                var array = Array();
+                var padding = word2index["<PAD>"];
+
+                // Using Jieba to split text.
+                call_jieba_cut(text_input.value, function (result) {
+                    result.forEach((e) => {
+                        if (word2index[e] == undefined) array.push(padding);
+                        else array.push(word2index[e]);
+                    });
+                });
+
+                // If Jieba didn't work correctly, use alternative function to split text.
+                if (array.length == 0) {
+                    // In Chinese, most words is 4 characters or less, so we set the max match
+                    // length to 4.
+                    let max_match = 4, i = 0;
+
+                    try {
+                        while (i < text_input.value.length) {
+                            let matched = false;
+
+                            for (let j = max_match; j > 0; j--) {
+                                let temp = text_input.value.slice(i, i + j);
+
+                                // Check if word exists.
+                                if (temp in word2index) {
+                                    array.push(word2index[temp]);
+                                    i += j;
+                                    matched = true;
+                                    break;
+                                }
+                            }
+
+                            // If didn't match any word, use <PAD>.
+                            if (!matched) {
+                                array.push(padding);
+                                i++;
+                            }
+                        }
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
+
+                while (array.length < 32) {
+                    array.push(padding);
+                }
+
+                return array.slice(0, 32);
             }
         </script>
 
