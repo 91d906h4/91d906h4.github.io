@@ -1,3 +1,5 @@
+import { word2index } from "./word2index";
+
 // Share.
 async function share() {
     const url = window.location.href;
