@@ -101,7 +101,7 @@ async function run_ai(array) {
         const results = await model.run({ "input.1": tensor });
 
         // Read result.
-        const data = results["677"].cpuData;
+        const data = results["674"].cpuData;
 
         return data;
     }
